@@ -8,5 +8,9 @@
 	<definition name="home" extends="standardLayout">
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
+	
+	<definition name="generic_error" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/generic_error.jsp" />
+	</definition>
 		
 </tiles-definitions>
