@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-
 /**
  * A user who can book hotels.
  */

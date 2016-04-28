@@ -10,7 +10,7 @@
 	<!-- Configures shared data layer -->
 	<import resource="data.xml" />
 	
-	<!-- Configures shared security layer
-	<import resource="security.xml" /> -->
+	<!-- Configures shared security layer -->
+	<import resource="security.xml" />
 	
 </beans>

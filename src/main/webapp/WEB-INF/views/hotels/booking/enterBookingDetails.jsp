@@ -14,7 +14,7 @@
 			${booking.hotel.country}
 		</address>
 		<p>
-			Nightly rate: <spring:bind path="booking.hotel.price">${status.value}</spring:bind>
+			Nightly rate: <spring:bind path="booking.hotel.price">${booking.hotel.price}</spring:bind>
 		</p>
 	</div>
 	<div class="span-12">
@@ -27,7 +27,9 @@
 				</spring:bind>
 			</div>
 		</spring:hasBindErrors>
-		<form:form modelAttribute="booking">
+		<c:url var="hotelsUrl" value="/booking/${booking.hotel.id}"/>
+		
+		<form:form  id="booking" modelAttribute="booking" action="${hotelsUrl}"  method="post">
 			<fieldset>
 				<legend>Book Hotel</legend>
 		        <div>
@@ -183,11 +185,22 @@
 				<div>
 					<p>
 					<button type="submit" id="proceed" name="_eventId_proceed">Proceed</button>
-					<button type="submit" name="_eventId_cancel" >Cancel</button>
+					<button type="submit" id="canel" name="_eventId_cancel" onclick="cancelFunction()">Cancel</button>
 					</p>
 					<script type="text/javascript">
 						Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));
 						Spring.addDecoration(new Spring.AjaxEventDecoration({elementId:'proceed',event:'onclick',formId:'booking',params:{fragments:'body'}}));
+					</script>
+					<script type="text/javascript">
+						function cancelFunction() {
+							var form = document.getElementById("booking");
+							var cancelbtn = document
+									.getElementsByName("_eventId_cancel");
+							if (cancelbtn) {
+								form.action = "../hotels/search";
+								form.method = "get";
+							}
+						}
 					</script>
 				</div>
 			</fieldset>

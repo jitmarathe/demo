@@ -23,6 +23,8 @@
 				<th>Address</th>
 				<th>City, State</th>
 				<th>Zip</th>
+				<th>Price</th>
+				<th>Rating</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -33,6 +35,8 @@
 					<td>${hotel.address}</td>
 					<td>${hotel.city}, ${hotel.state}, ${hotel.country}</td>
 					<td>${hotel.zip}</td>
+					<td>${hotel.price}</td>
+					<td>${hotel.rating}</td>
 					<td><a href="hotels/${hotel.id}">View Hotel</a></td>
 				</tr>
 			</c:forEach>

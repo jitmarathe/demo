@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -60,11 +61,27 @@ public class JpaBookingService implements BookingService {
 		return em.find(Hotel.class, id);
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Booking createBooking(Long hotelId, String username) {
 		Hotel hotel = em.find(Hotel.class, hotelId);
 		User user = findUser(username);
 		Booking booking = new Booking(hotel, user);
+		return booking;
+	}
+	
+	@Transactional
+	public Booking confirmBooking(Booking booking, Long hotelId, String username) {
+		Hotel hotel = em.find(Hotel.class, hotelId);
+		User user = findUser(username);
+		booking.setHotel(hotel);
+		booking.setUser(user);
+		return booking;
+	}
+
+	
+	@Transactional
+	public Booking persistBooking(Booking booking, Long hotelId, String username) {
+		booking.setId(null);
 		em.persist(booking);
 		return booking;
 	}
@@ -92,10 +109,10 @@ public class JpaBookingService implements BookingService {
 			
 		}
 		
-		Hotel hotel = new Hotel("Hyatt","Viman Nagar", "Pune", "MH", "411001", "India", new BigDecimal(4000));
+		Hotel hotel = new Hotel("Hyatt","Viman Nagar", "Pune", "MH", "411001", "India", new BigDecimal(4000),"3 Star");
 		em.persist(hotel);
 		
-		Hotel hotel1 = new Hotel("Taj","Dhaula Kuan", "Delhi", "DL", "110001", "India", new BigDecimal(14000));
+		Hotel hotel1 = new Hotel("Taj","Dhaula Kuan", "Delhi", "DL", "110001", "India", new BigDecimal(14000),"3 Star");
 		em.persist(hotel1);
 		
 	}

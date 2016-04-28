@@ -11,6 +11,11 @@ import javax.persistence.Id;
 /**
  * A hotel where users may book stays.
  */
+/**
+ * @author ashish.c.tiwari
+ *
+ */
+
 @Entity
 public class Hotel implements Serializable {
 	
@@ -30,7 +35,9 @@ public class Hotel implements Serializable {
 
 	private BigDecimal price;
 	
-	public Hotel(String name, String address, String city, String state, String zip, String country, BigDecimal price){
+	private String rating;
+	
+	public Hotel(String name, String address, String city, String state, String zip, String country, BigDecimal price, String rating){
 		this.name = name;
 		this.address = address;
 		this.city = city;
@@ -38,6 +45,7 @@ public class Hotel implements Serializable {
 		this.zip = zip;
 		this.country = country;
 		this.price = price;
+		this.rating = rating;
 		
 	}
 	
@@ -102,6 +110,14 @@ public class Hotel implements Serializable {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
 
 	@Column(precision = 6, scale = 2)
 	public BigDecimal getPrice() {
@@ -111,6 +127,8 @@ public class Hotel implements Serializable {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+	
+	
 
 	public Booking createBooking(User user) {
 		return new Booking(this, user);
@@ -118,7 +136,7 @@ public class Hotel implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Hotel(" + name + "," + address + "," + city + "," + zip + ")";
+		return "Hotel(" + name + "," + address + "," + city + ","+ rating + ","+ price + "," + zip + ")";
 	}
 
 }

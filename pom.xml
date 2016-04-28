@@ -155,8 +155,12 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- <dependency> <groupId>javax.servlet.jsp</groupId> <artifactId>jsp-api</artifactId> 
-			<version>2.1</version> <scope>provided</scope> </dependency> -->
+		<dependency> 
+		<groupId>javax.servlet.jsp</groupId>
+		 <artifactId>jsp-api</artifactId> 
+			<version>2.1</version>
+			 <scope>provided</scope>
+		 </dependency> 
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -188,7 +192,7 @@
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
+			<version>1.1.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -239,14 +243,22 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-			<plugin>
+			 <!-- <plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
-					<!-- <warSourceDirectory>WebContent</warSourceDirectory> -->
-					<failOnMissingWebXml>true</failOnMissingWebXml>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
-			</plugin>
+			</plugin> --> 
+			  <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.6</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>

@@ -10,13 +10,15 @@
 	<br />
 	${hotel.country}
 </address>
-<form action="booking" method="get">
+<spring:url var="bookUrl" value="/booking/${hotel.id}"/>
+						
+<form:form modelAttribute="hotel" action="${bookUrl}" method="get">
 	<p>
 		Nightly Rate:
-		<spring:bind path="hotel.price">${status.value}</spring:bind>
+		<spring:bind path="hotel.price">${hotel.price}</spring:bind>
 	</p>
 	<input type="hidden" name="hotelId" value="${hotel.id}" />
 	<div>
 		<button type="submit">Book Hotel</button>
 	</div>
-</form>
+</form:form>

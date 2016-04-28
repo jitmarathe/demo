@@ -38,6 +38,14 @@
 	
 	<!-- Configures transaction management around @Transactional components -->
 	<tx:annotation-driven />
+	
+	<!-- <beans:bean id="bookingValidator" class="org.springframework.samples.travel.BookingDateRangeValidator" /> -->
+     
+    <beans:bean id="messageSource"
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <beans:property name="basename" value="classpath:messages" />
+        <beans:property name="defaultEncoding" value="UTF-8" />
+    </beans:bean>
 
 	<!-- Imports the application controllers that process client requests -->
 	<beans:import resource="controllers.xml" />

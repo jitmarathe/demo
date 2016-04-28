@@ -13,4 +13,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/hotels/booking/reviewBooking.jsp" />
 	</definition>
 	
+	<definition name="confirmBooking" extends="standardLayout">
+		<put-attribute name="body" value="/WEB-INF/views/hotels/booking/confirmBooking.jsp" />
+	</definition>
+	
 </tiles-definitions>

@@ -36,7 +36,8 @@ public interface BookingService {
      * @return the new transient booking instance
      */
     public Booking createBooking(Long hotelId, String userName);
-
+    
+    
     /**
      * Cancel an existing booking.
      * @param id the booking id
@@ -54,6 +55,10 @@ public interface BookingService {
      * @return User object
      */
     public User findUser(String username);
+
+	public Booking confirmBooking(Booking booking, Long id, String name);
+
+	public Booking persistBooking(Booking booking, Long id, String name);
 
 }
 

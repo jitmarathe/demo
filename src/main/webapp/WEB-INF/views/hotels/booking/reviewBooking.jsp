@@ -15,7 +15,11 @@
 		</address>
 	</div>
 	<div class="span-12 last">
-		<form:form id="confirm" modelAttribute="booking">
+	<c:url var="hotelsUrl" value="/bookingSaved/${booking.hotel.id}" />
+	<c:url var="Url" value="/booking/${booking.hotel.id}" />
+		<form:form id="confirm" modelAttribute="booking" action="${hotelsUrl}"  method="post">
+		<input type="hidden" name="id" value="${booking.hotel.id}" />
+		<c:set var="Key1" value="${Url}" />
 		<fieldset>
 			<legend>Confirm Booking Details</legend>
 			<div>
@@ -49,10 +53,40 @@
 				</div>
 			</div>
 			<div>
-				<button type="submit" name="_eventId_confirm">Confirm</button>
-				<button type="submit" name="_eventId_revise">Revise</button>
-				<button type="submit" name="_eventId_cancel">Cancel</button>
-			</div>
+				 <p>
+                    <button type="submit" name="_eventId_confirm">Confirm</button>
+                    <button type="submit" name="_eventId_revise" onClick="additionalFunction('${Key1}')" id="revise">Revise</button>
+                    <button type="submit" name="_eventId_cancel" onClick="cancelFunction()">Cancel</button>
+                    </p>
+                    <script type="text/javascript">
+                        // <![CDATA[
+                        Spring.addDecoration(new Spring.AjaxEventDecoration({elementId:'revise',event:'onclick',formId:'confirm'}));
+                        // ]]>
+                    </script>
+
+					<script type="text/javascript">
+					function additionalFunction(obj){
+				
+						var form = document.getElementById("confirm");
+						var myvar='${Key1}';
+							var revisebutton = document
+									.getElementsByName("_eventId_revise");
+							if (revisebutton) {
+								form.action = myvar;
+								form.method = "get";
+							}
+						}
+					function cancelFunction() {
+						var form = document.getElementById("confirm");
+						var cancelbtn = document
+								.getElementsByName("_eventId_cancel");
+						if (cancelbtn) {
+							form.action = "../hotels/search";
+							form.method = "get";
+						}
+					}
+					</script>
+				</div>
 		</fieldset>
 		</form:form>
 	</div>
