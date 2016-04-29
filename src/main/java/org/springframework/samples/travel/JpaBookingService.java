@@ -48,9 +48,9 @@ public class JpaBookingService implements BookingService {
 		String pattern = getSearchPattern(criteria);
 		return em.createQuery(
 				"select h from Hotel h where lower(h.name) like " + pattern
-						+ " or lower(h.city) like " + pattern
-						+ " or lower(h.zip) like " + pattern
-						+ " or lower(h.address) like " + pattern)
+				+ " or lower(h.city) like " + pattern
+				+ " or lower(h.zip) like " + pattern
+				+ " or lower(h.address) like " + pattern)
 				.setMaxResults(criteria.getPageSize()).setFirstResult(
 						criteria.getPage() * criteria.getPageSize())
 				.getResultList();
@@ -68,7 +68,7 @@ public class JpaBookingService implements BookingService {
 		Booking booking = new Booking(hotel, user);
 		return booking;
 	}
-	
+
 	@Transactional
 	public Booking confirmBooking(Booking booking, Long hotelId, String username) {
 		Hotel hotel = em.find(Hotel.class, hotelId);
@@ -78,7 +78,7 @@ public class JpaBookingService implements BookingService {
 		return booking;
 	}
 
-	
+
 	@Transactional
 	public Booking persistBooking(Booking booking, Long hotelId, String username) {
 		booking.setId(null);
@@ -93,8 +93,8 @@ public class JpaBookingService implements BookingService {
 			em.remove(booking);
 		}
 	}
-	
-	
+
+
 	@Transactional
 	public void createBasicData() {
 		User user = new User("testuser","testuser", "testname");
@@ -102,29 +102,29 @@ public class JpaBookingService implements BookingService {
 			em.persist(user);
 		}
 		//em.close();
-		
+
 		User findUser = em.find(User.class, "testuser");
 		if(findUser != null){
 			System.out.println("!!!!!! Find user:" + findUser.getName());
-			
+
 		}
-		
+
 		Hotel hotel = new Hotel("Hyatt","Viman Nagar", "Pune", "MH", "411001", "India", new BigDecimal(4000),"3 Star");
 		em.persist(hotel);
-		
+
 		Hotel hotel1 = new Hotel("Taj","Dhaula Kuan", "Delhi", "DL", "110001", "India", new BigDecimal(14000),"3 Star");
 		em.persist(hotel1);
-		
+
 	}
-	
-	
+
+
 	// helpers
 
 	private String getSearchPattern(SearchCriteria criteria) {
 		if (StringUtils.hasText(criteria.getSearchString())) {
 			return "'%"
 					+ criteria.getSearchString().toLowerCase()
-							.replace('*', '%') + "%'";
+					.replace('*', '%') + "%'";
 		} else {
 			return "'%'";
 		}
