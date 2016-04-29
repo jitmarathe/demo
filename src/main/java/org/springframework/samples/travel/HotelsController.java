@@ -27,15 +27,6 @@ public class HotelsController {
 	
 	static int status = 0;
 	
-	/*@Autowired
-    @Qualifier("bookingValidator")
-    private Validator validator;
- 
-    @InitBinder
-    private void initBinder(WebDataBinder binder) {
-        binder.setValidator(validator);
-    }*/
-
 	@Inject
 	public HotelsController(BookingService bookingService) {
 		this.bookingService = bookingService;
@@ -120,9 +111,10 @@ public class HotelsController {
 	@ExceptionHandler(value = Exception.class)
 	public String handleGenericException(HttpServletRequest request, Exception ex) {
 
-		logger.info("Inside Exception handler");
+		logger.info("Start Exception handler");
 		System.out.println(request.getRequestURL().toString());
 		ex.printStackTrace();
+		logger.info("End Exception handler");
 		return ex.getMessage();
 	}
 
